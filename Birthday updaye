@@ -1,0 +1,10 @@
+employee = zoho.people.getRecordByID("employee",emp_id);
+dob = zoho.currentdate;
+// info "Current date from zoho" + dob;
+nexdob = dob.toDate().addYear(1);
+info "+1 year with zoho date " + nexdob;
+col = Collection();
+col.insert("recordid":emp_id);
+col.insert("Next_Birthday":nexdob);
+uprec = zoho.people.update("employee",col.toMap());
+info uprec;
