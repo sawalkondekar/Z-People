@@ -1,0 +1,29 @@
+Req: on create or edit fetch dd-mm and put current year and after next birthday updated dd-mm- next year
+
+
+respData = zoho.people.getRecordByID("employee",empId);
+// info respData;
+dob = respData.get("Date_of_birth");
+dob_year = dob.getYear();
+// info dob_year;
+curDate = zoho.currentdate;
+// info date;
+curYear = curDate.getYear();
+// info year;
+nextDob = replaceAll(dob,dob_year,curYear);
+if(toDate(curDate) >= toDate(nextDob))
+{
+nextDob = replaceAll(dob,dob_year,curYear);
+nextDob = nextDob.addYear(1);
+// 	info newText;
+}
+else
+{
+nextDob = nextDob;
+}
+info nextDob;
+myMap = Map();
+myMap.put("Next_Birthday",nextDob);
+myMap.put("recordid",empId);
+update = zoho.people.update("employee",myMap);
+info update;
